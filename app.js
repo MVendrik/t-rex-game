@@ -1,27 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const trex = document.querySelector('.trex');
+  let isJumping = false;
+  const gravity = 0.9;
+  let position = 0;
 
 
   document.addEventListener('keydown', (e) => {
-    let position = 0;
+    let count = 0;
     if (e.keyCode === 32) {
-    
-      let timerUp = setInterval( () => {
-        if (position == 150) {
-          clearInterval(timerUp);
-          let timerDown = setInterval( () => {
-            if (position == 30 ){
-              clearInterval(timerDown);
-            }
-            position -= 30;
-            trex.style.bottom = position + 'px';
-          }, 20);
-        }
 
-        position += 30;
-        trex.style.bottom = position + 'px';
-      }, 20);  
-    }
-    } );
-})
+      if (! isJumping) {
+        isJumping = true;
+
+        let timerUp = setInterval( () => {
+          if (count == 15) {
+            clearInterval(timerUp);
+            let timerDown = setInterval( () => {
+              if (count == 0 ){
+                clearInterval(timerDown);
+                isJumping = false;
+              }
+              count --;
+              position -= 5;
+              position = position * gravity;
+              trex.style.bottom = position + 'px';
+            }, 20);
+          }
+  
+          count ++;
+          position += 30;
+          position = position * gravity;
+          trex.style.bottom = position + 'px';
+        }, 20);  
+      };
+    };
+  } );
+});
