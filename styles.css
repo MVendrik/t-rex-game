@@ -1,3 +1,7 @@
-body {
-  /* styles go here */
+.trex {
+  background-color: red;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  bottom: 0;
 }
