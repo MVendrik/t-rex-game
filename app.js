@@ -37,4 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   } );
 
+  function addObstacles() {
+    let obstaclePosition = 1000;
+    let randomTime = Math.random() * 4000;
+
+    const obstacle = document.createElement('div');
+    obstacle.className = 'obstacle';
+    
+    const grid = document.querySelector('.grid');
+    grid.appendChild(obstacle);
+    obstacle.style.left = obstaclePosition + 'px';
+
+    let timer = setInterval(() => {
+      if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
+        clearInterval(timer);
+        alert('game over');
+      }
+
+      obstaclePosition -= 10;
+      obstacle.style.left = obstaclePosition + 'px';
+    }, 20 );
+
+    setTimeout(addObstacles, randomTime);
+  };
+
+  addObstacles();
+
 });
