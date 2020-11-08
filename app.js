@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let isJumping = false;
   const gravity = 0.9;
   let position = 0;
+  let isGameOver = false;
+  const alert = document.querySelector('.alert');
 
   // Jump functionality Trex 
   document.addEventListener('keydown', (e) => {
@@ -42,7 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomTime = Math.random() * 4000;
 
     const obstacle = document.createElement('div');
-    obstacle.className = 'obstacle';
+   
+    if(!isGameOver) {
+      obstacle.className = 'obstacle';
+    };
     
     const grid = document.querySelector('.grid');
     grid.appendChild(obstacle);
@@ -51,14 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let timer = setInterval(() => {
       if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
         clearInterval(timer);
-        alert('game over');
+        alert.innerHTML = 'Game over!';
+        isGameOver = true;
       }
 
       obstaclePosition -= 10;
       obstacle.style.left = obstaclePosition + 'px';
     }, 20 );
 
-    setTimeout(addObstacles, randomTime);
+    if (!isGameOver) {
+      setTimeout(addObstacles, randomTime);
+    }
   };
 
   addObstacles();
