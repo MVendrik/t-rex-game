@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let position = 0;
   let isGameOver = false;
   const alert = document.querySelector('.alert');
+  let countingScore = false;
+  let scoreTimer;
 
   // Jump functionality Trex 
   document.addEventListener('keydown', (e) => {
     let count = 0;
     if (e.keyCode === 32) {
+
+      if (!countingScore) {
+        countScore();
+        countingScore = true;
+      }
 
       if (! isJumping) {
         isJumping = true;
@@ -58,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timer);
         alert.innerHTML = 'Game over!';
         isGameOver = true;
+        stopScore();
 
         // Remove previous obstacles
         while(grid.firstChild) {
@@ -73,6 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(addObstacles, randomTime);
     }
   };
+
+  function countScore() {
+    let totalseconds = 0;
+    const score = document.querySelector('.score');
+
+    scoreTimer = setInterval( () => {
+      totalseconds++;
+      score.innerHTML = totalseconds;
+    }, 100);
+  }
+
+  function stopScore() {
+    clearInterval(scoreTimer);
+    countingScore = false;
+  }
 
   addObstacles();
 
