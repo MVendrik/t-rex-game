@@ -1,3 +1,7 @@
+.container {
+  padding-top: 100px;
+}
+
 .trex {
   background-color: red;
   width: 70px;
