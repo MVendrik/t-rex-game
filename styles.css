@@ -2,6 +2,12 @@
   padding-top: 100px;
 }
 
+.alert,
+.highscore,
+.score {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
 .trex {
   background-color: red;
   width: 70px;
