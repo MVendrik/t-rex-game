@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const alert = document.querySelector('.alert');
   let countingScore = false;
   let scoreTimer;
+  let scoreValue;
 
   // Jump functionality Trex 
   document.addEventListener('keydown', (e) => {
@@ -83,18 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function countScore() {
-    let totalseconds = 0;
+    let totalSeconds = 0;
     const score = document.querySelector('.score');
 
     scoreTimer = setInterval( () => {
-      totalseconds++;
-      score.innerHTML = totalseconds;
+      totalSeconds++;
+
+      scoreValue = totalSeconds + "";
+
+      score.innerHTML = ((new Array((6) - scoreValue.length).join('0')) + scoreValue);
+
     }, 100);
   }
 
+ 
   function stopScore() {
     clearInterval(scoreTimer);
-    countingScore = false;
+    //countingScore = false;
   }
 
   addObstacles();
